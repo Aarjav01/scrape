@@ -1,0 +1,29 @@
+name: Playwright Table Scraper
+
+on:
+  workflow_dispatch: # This gives us a manual 'play' button in GitHub
+
+jobs:
+  scrape-and-sum:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step A: Get the code from your repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step B: Install Python and Playwright
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Playwright and Browser
+        run: |
+          pip install playwright
+          playwright install chromium
+
+      # Step C: The Assignment Requirement! 
+      # Run the script under a step named with your email
+      - name: Run scraper for 23f1001127@ds.study.iitm.ac.in
+        run: python scrape.py
